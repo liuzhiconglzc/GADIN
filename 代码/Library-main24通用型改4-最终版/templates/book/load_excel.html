@@ -1,0 +1,190 @@
+{% extends "layouts/base.html" %}
+{% load book_extras %}
+{% block title %} Management {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">数据重编码</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <!-- [ basic-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5> 数据量 {{count_total}}</h5>
+{#                                <h5>{{msg}}</h5>#}
+                            </div>
+
+                            {% show_messages %}
+
+                            <div class="card-block">
+                                <div class='row'>
+                                    <div class="col-8">
+                                        <form id="form" enctype="multipart/form-data" action="/upload/" method="post">
+                                            {% csrf_token %}
+                                            <p><input type="file" name="my_file"></p>
+                                            <input type="submit" name="提交">
+                                        </form>
+{#                                        <b>Sort By : - </b>#}
+{#                                        <a href="{% url 'user_info' %}?search={{search}}&orderby=id">Id</a>  |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=username">姓名</a> |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=phone"></a> |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=phone">Quantity</a>#}
+                                    </div>
+
+                                    <div class="col-4">
+                                        <form class="form-inline mb-2">
+                                            <div class="form-group mx-sm-3 mb-2">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="search",
+                                                       id='search',
+                                                       placeholder="重编码数据",
+                                                       value={{search}}
+                                                       >
+                                            </div>
+                                            <button type="submit" class="btn btn-secondary mb-2 btn-sm" style="margin-left: 125px">重编码</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive ">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                {% if condition1 %}
+                                                    <th>公司名</th>
+                                                {% endif %}
+                                                {% if condition2 %}
+                                                    <th>类型</th>
+                                                {% endif %}
+                                                {% if condition3 %}
+                                                    <th>数据来源</th>
+                                                {% endif %}
+                                                {% if condition4 %}
+                                                    <th>数据类型</th>
+                                                {% endif %}
+                                                {% if condition5 %}
+                                                    <th>现金及存放中央银行款项(元)</th>
+                                                {% endif %}
+                                                {% if condition6 %}
+                                                    <th>可供出售金融资产(元)</th>
+                                                {% endif %}
+                                                {% if condition7 %}
+                                                    <th>一般风险准备(元)</th>
+                                                {% endif %}
+                                                {% if condition8 %}
+                                                    <th>应付利息(元)</th>
+                                                {% endif %}
+                                                {% if condition9 %}
+                                                    <th>实收资本</th>
+                                                {% endif %}
+                                                {% if condition10 %}
+                                                    <th>固定资产</th>
+                                                {% endif %}
+                                                {% if condition11 %}
+                                                    <th>资产总计</th>
+                                                {% endif %}
+                                                {% if condition12 %}
+                                                    <th>资本公积</th>
+                                                {% endif %}
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for book in books %}
+                                            <tr>
+                                                <th scope="row">{{ book.zcfz_id }}</th>
+                                                {% if condition1 %}
+                                                    <td>{{ book.company_name }}</td>
+                                                {% endif %}
+                                                {% if condition2 %}
+                                                    <td>{{ book.type }}</td>
+                                                {% endif %}
+                                                {% if condition3 %}
+                                                    <td>{{ book.bbd_url }}</td>
+                                                {% endif %}
+                                                {% if condition4 %}
+                                                    <td>{{ book.bbd_type }}</td>
+                                                {% endif %}
+                                                {#                                                <!-- <td>{{book.updated|date:"Y/m/d H:i" }}</td> -->#}
+                                                {% if condition5 %}
+                                                    <td>{{ book.cash_central_bank_funds }}</td>
+                                                {% endif %}
+                                                {% if condition6 %}
+                                                    <td>{{ book.sellable_assetset }}</td>
+                                                {% endif %}
+                                                {% if condition7 %}
+                                                    <td>{{ book.risk_preparation }}</td>
+                                                {% endif %}
+                                                {#                                                <td>{{book.floor_number}}{{book.bookshelf_number}}</td>#}
+                                                {% if condition8 %}
+                                                    <td>{{ book.interest_payable }}  </td>
+                                                {% endif %}
+                                                {% if condition9 %}
+                                                    <td>{{ book.paid_in_capital }}  </td>
+                                                {% endif %}
+                                                {% if condition10 %}
+                                                    <td>{{ book.fixed_assets }}  </td>
+                                                {% endif %}
+                                                {% if condition11 %}
+                                                    <td>{{ book.total_assets }}  </td>
+                                                {% endif %}
+                                                {% if condition12 %}
+                                                    <td>{{ book.capital_reserves }}  </td>
+                                                {% endif %}
+                                                <td>
+{#                                                    <a href="{% url 'book_detail' book.id%}" class="badge badge-warning"><i class="feather icon-eye"></i></a>#}
+                                                    <a href="{% url 'bank_update' book.id%}" class="badge badge-info"><i class="feather icon-edit"></i>&nbsp;修改</a>&nbsp;
+                                                    <a href="{% url 'bank_delete' book.id%}" class="badge badge-danger"><i class="feather icon-trash-2"></i>&nbsp;删除</a>&nbsp;
+                                                </td>
+
+                                            </tr>
+                                            {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class='col-4'>
+{#                                        <a href="{% url 'user_create' %}" class='btn btn-primary'>增加用户</a>#}
+                                    </div>
+                                    <div class='col-8'>
+                                        {% show_pagination %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

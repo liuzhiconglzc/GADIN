@@ -1,0 +1,57 @@
+{% load book_extras %}
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a target="_blank" 
+                   href="" class="b-brand">
+                    <div class="b-bg">
+                        <i class="feather icon-trending-up"></i>
+                    </div>
+                    <span class="b-title">填补系统</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Menu</label>
+                    </li>
+                  <!-- hmf 新增 用戶信息管理 begin-->
+                {% if request.user.username == '123456'  %}
+                   <li
+                        class="nav-item {% if 'index' in segment %} active {% endif %}">
+                        <a href="{% url 'user_info' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">用户信息管理</span></a>
+                    </li>
+                {% endif%}
+                  <!-- hmf 新增 用戶信息管理 end-->
+                  <!-- hmf 新增 数据预处理 begin-->
+                {% if request.user.username != '123456'  %}
+                   <li class="nav-item pcoded-hasmenu {% if request.resolver_match.url_name == 'book_list' or request.resolver_match.url_name == 'book_create' or request.resolver_match.url_name == 'book_update' or request.resolver_match.url_name == 'book_delete' or request.resolver_match.url_name == 'book_detail' %} active pcoded-trigger {% endif %}">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">数据预处理</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'upload_bank' %}" class="">数据重编码</a></li>
+                            <li class=""><a href="{% url 'del_attribute' %}" class="">冗余属性删除</a></li>
+{#                            <li class=""><a href="{% url 'data_nov' %}" class="">数据归一化</a></li>#}
+                            <li class=""><a href="{% url 'data_con' %}" class="">缺失率计算</a></li>
+                        </ul>
+                    </li>
+                  <!-- hmf 新增 数据预处理 end-->
+
+                   <!-- hmf 新增 模型构建 begin-->
+                   <li
+                        class="nav-item {% if 'index' in segment %} active {% endif %}">
+                        <a href="{% url 'model_building' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">模型构建</span></a>
+                    </li>
+
+                  <!-- hmf 新增 模型构建 end-->
+                   <!-- hmf 新增 填补数据 begin-->
+                   <li
+                        class="nav-item {% if 'index' in segment %} active {% endif %}">
+                        <a href="{% url 'fill_data' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">数据填补</span></a>
+                    </li>
+                {% endif%}
+                </ul>
+            </div>
+        </div>
+    </nav>

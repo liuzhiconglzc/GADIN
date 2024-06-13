@@ -1,0 +1,239 @@
+{% extends "layouts/base.html" %}
+{% load book_extras %}
+{% block title %} Management {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">数据重编码</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <!-- [ basic-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5> 数据量 {{count_total}}</h5>
+{#                                <h5>{{msg}}</h5>#}
+                            </div>
+
+                            {% show_messages %}
+
+                            <div class="card-block">
+                                <div class='row'>
+                                    <div class="col-8">
+                                        <form id="form" enctype="multipart/form-data" action="/upload/" method="post">
+                                            {% csrf_token %}
+                                            <p><input type="file" name="my_file"></p>
+                                            <input type="submit" name="提交">
+                                        </form>
+{#                                        <b>Sort By : - </b>#}
+{#                                        <a href="{% url 'user_info' %}?search={{search}}&orderby=id">Id</a>  |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=username">姓名</a> |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=phone"></a> |#}
+{#                                        <a href="{% url 'user_info' %}?search={{ search }}&orderby=phone">Quantity</a>#}
+                                    </div>
+
+                                    <div class="col-4">
+                                        <form class="form-inline mb-2">
+                                            <div class="form-group mx-sm-3 mb-2">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="search",
+                                                       id='search',
+                                                       placeholder="重编码数据",
+                                                       value={{search}}
+                                                       >
+                                            </div>
+                                            <button type="submit" class="btn btn-secondary mb-2 btn-sm" style="margin-left: 125px">重编码</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive ">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                {% if condition1 %}
+                                                    <th>{{condition1 }}</th>
+                                                {% endif %}
+                                                {% if condition2 %}
+                                                    <th>{{ condition2}}</th>
+                                                {% endif %}
+                                                {% if condition3 %}
+                                                    <th>{{ condition3}}</th>
+                                                {% endif %}
+                                                {% if condition4 %}
+                                                    <th>{{condition4 }}</th>
+                                                {% endif %}
+                                                {% if condition5 %}
+                                                    <th>{{ condition5}}</th>
+                                                {% endif %}
+                                                {% if condition6 %}
+                                                    <th>{{ condition6}}</th>
+                                                {% endif %}
+                                                {% if condition7 %}
+                                                    <th>{{condition7 }}</th>
+                                                {% endif %}
+                                                {% if condition8 %}
+                                                    <th>{{condition8 }}</th>
+                                                {% endif %}
+                                                {% if condition9 %}
+                                                    <th>{{condition9 }}</th>
+                                                {% endif %}
+                                                {% if condition10 %}
+                                                    <th>{{condition10 }}</th>
+                                                {% endif %}
+                                                {% if condition11 %}
+                                                    <th>{{ condition11}}</th>
+                                                {% endif %}
+                                                {% if condition12 %}
+                                                    <th>{{condition12 }}</th>
+                                                {% endif %}
+                                             {% if condition13 %}
+                                                    <th>{{ condition13}}</th>
+                                                {% endif %}
+                                             {% if condition14 %}
+                                                    <th>{{condition14 }}</th>
+                                                {% endif %}
+                                             {% if condition15 %}
+                                                    <th>{{ condition15}}</th>
+                                                {% endif %}
+                                             {% if condition16 %}
+                                                    <th>{{ condition16}}</th>
+                                                {% endif %}
+                                             {% if condition17 %}
+                                                    <th>{{condition17 }}</th>
+                                                {% endif %}
+                                             {% if condition18 %}
+                                                    <th>{{condition18 }}</th>
+                                                {% endif %}
+                                             {% if condition19 %}
+                                                    <th>{{ condition19}}</th>
+                                                {% endif %}
+                                             {% if condition20 %}
+                                                    <th>{{ condition20}}</th>
+                                                {% endif %}
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for book in books %}
+                                            <tr>
+                                                <th scope="row">{{ book.id }}</th>
+                                                {% if condition1 %}
+                                                    <td>{{ book.col_1 }}</td>
+                                                {% endif %}
+                                                {% if condition2 %}
+                                                    <td>{{ book.col_2 }}</td>
+                                                {% endif %}
+                                                {% if condition3 %}
+                                                    <td>{{ book.col_3 }}</td>
+                                                {% endif %}
+                                                {% if condition4 %}
+                                                    <td>{{ book.col_4 }}</td>
+                                                {% endif %}
+                                                {#                                                <!-- <td>{{book.updated|date:"Y/m/d H:i" }}</td> -->#}
+                                                {% if condition5 %}
+                                                    <td>{{ book.col_5 }}</td>
+                                                {% endif %}
+                                                {% if condition6 %}
+                                                    <td>{{ book.col_6 }}</td>
+                                                {% endif %}
+                                                {% if condition7 %}
+                                                    <td>{{ book.col_7 }}</td>
+                                                {% endif %}
+                                                {#                                                <td>{{book.floor_number}}{{book.bookshelf_number}}</td>#}
+                                                {% if condition8 %}
+                                                    <td>{{ book.col_8 }}  </td>
+                                                {% endif %}
+                                                {% if condition9 %}
+                                                    <td>{{ book.col_9 }}  </td>
+                                                {% endif %}
+                                                {% if condition10 %}
+                                                    <td>{{ book.col_10 }}  </td>
+                                                {% endif %}
+                                                {% if condition11 %}
+                                                    <td>{{ book.col_11 }}  </td>
+                                                {% endif %}
+                                                {% if condition12 %}
+                                                    <td>{{ book.col_12 }}  </td>
+                                                {% endif %}
+                                                {% if condition13 %}
+                                                    <td>{{ book.col_13 }}  </td>
+                                                {% endif %}
+                                                {% if condition14 %}
+                                                    <td>{{ book.col_14 }}  </td>
+                                                {% endif %}
+                                                {% if condition15 %}
+                                                    <td>{{ book.col_15 }}  </td>
+                                                {% endif %}
+                                                {% if condition16 %}
+                                                    <td>{{ book.col_16 }}  </td>
+                                                {% endif %}
+                                                {% if condition17 %}
+                                                    <td>{{ book.col_17 }}  </td>
+                                                {% endif %}
+                                                {% if condition18 %}
+                                                    <td>{{ book.col_18 }}  </td>
+                                                {% endif %}
+                                                {% if condition19 %}
+                                                    <td>{{ book.col_19 }}  </td>
+                                                {% endif %}
+                                                {% if condition20 %}
+                                                    <td>{{ book.col_20 }}  </td>
+                                                {% endif %}
+                                                <td>
+{#                                                    <a href="{% url 'book_detail' book.id%}" class="badge badge-warning"><i class="feather icon-eye"></i></a>#}
+                                                    <a href="{% url 'bank_update' book.id%}" class="badge badge-info"><i class="feather icon-edit"></i>&nbsp;修改</a>&nbsp;
+                                                    <a href="{% url 'bank_delete' book.id%}" class="badge badge-danger"><i class="feather icon-trash-2"></i>&nbsp;删除</a>&nbsp;
+                                                </td>
+
+                                            </tr>
+                                            {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class='col-4'>
+{#                                        <a href="{% url 'user_create' %}" class='btn btn-primary'>增加用户</a>#}
+                                        <a href="{% url 'output_excel' %}"
+                                           class="btn btn-secondary mb-2 btn-sm">导出数据</a>
+                                    </div>
+                                    <div class='col-8'>
+                                        {% show_pagination %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
